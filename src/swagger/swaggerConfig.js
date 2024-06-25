@@ -7,7 +7,7 @@ const options = {
             title: "User Management API",
             version: "1.0.0",
             description:
-                "API de gerenciamento de usuários com autenticação e autorização",
+                "API for user management with authentication and authorization",
         },
         servers: [
             {

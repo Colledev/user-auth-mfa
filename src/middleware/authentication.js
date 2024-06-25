@@ -8,6 +8,12 @@ const generateToken = (user) => {
     return jwt.sign(user, SECRET_KEY, { expiresIn: "1h" });
 };
 
+const generateMfaToken = (user) => {
+    return jwt.sign({ id: user.id, mfa: true }, SECRET_KEY, {
+        expiresIn: "5m",
+    });
+};
+
 const verifyToken = (token) => {
     try {
         return jwt.verify(token, SECRET_KEY);
@@ -45,22 +51,25 @@ const authenticateToken = async (req, res, next) => {
         });
 
         if (!user) {
-            return res
-                .status(401)
-                .json({ error: "Unauthorized", message: "User not found" });
+            return res.status(401).json({
+                error: "Unauthorized",
+                message: "User not found",
+            });
         }
 
         req.loggedUser = user;
         next();
     } catch (error) {
-        return res
-            .status(401)
-            .json({ error: "Unauthorized", message: error.message });
+        return res.status(401).json({
+            error: "Unauthorized",
+            message: error.message,
+        });
     }
 };
 
 module.exports = {
     generateToken,
+    generateMfaToken,
     verifyToken,
     authenticateToken,
 };
