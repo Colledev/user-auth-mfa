@@ -1,4 +1,4 @@
-# Passport Authentication with Google OAuth2
+# Multi-Factor Authentication
 
 This project demonstrates how to implement Multi-Factor Authentication speakeasy and qrcode. It allows users to authenticate with MFA for more security.
 
